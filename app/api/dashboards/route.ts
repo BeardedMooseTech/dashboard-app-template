@@ -21,8 +21,24 @@ export async function POST() {
             "handle_api_call",
             [],
             {
-              query:
-                'query { StockPicking(order:"sale_id desc") { id name picking_type_id { id name display_name } sale_id { id name partner_id { id name } } }}',
+              query: `
+              query {
+                StockPicking(domain:[["state", "=", "assigned"], ["picking_type_id.name", "in", ["Pick", "Delivery Orders"]]]) {
+                  
+                  state
+                  display_name
+                  picking_type_id {
+                    name
+                    display_name
+                    id
+                  }
+                  sale_id {
+                    id
+                    name
+                    display_name
+                  }
+                }
+              }`,
             },
           ],
         },
