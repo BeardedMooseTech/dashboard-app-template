@@ -17,9 +17,9 @@ const DonutChart: React.FC<DonutChartProps> = ({
 }) => {
   const calcX = useCallback(() => {
     if (precentComplete < 10) {
-      return "16";
+      return "15";
     } else if (precentComplete < 100) {
-      return "12";
+      return "13";
     } else {
       return "8";
     }
@@ -31,14 +31,6 @@ const DonutChart: React.FC<DonutChartProps> = ({
       style={{ ...style }}
       className={`${className} ${styles.donutChart}`}
     >
-      <circle
-        cx="21"
-        cy="21"
-        r="15.9"
-        id="center"
-        fill="#d18c00"
-        className={styles.center}
-      />
       <circle
         cx="21"
         cy="21"

@@ -20,7 +20,7 @@ export default function Devices() {
   return (
     <main className={`h-screen w-screen ${styles.main}`}>
       <Header />
-      <DonutChart precentComplete={percent} className="h-1/2" />
+      <DonutChart precentComplete={percent} className="h-3/4" />
     </main>
   );
 }
