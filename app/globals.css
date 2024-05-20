@@ -3,16 +3,15 @@
 @tailwind utilities;
 
 :root {
-  --background-color: #3e2723;
-  --control-color: #ffab00;
+  --control-color: #ffffff;
   --foreground-rgb: 255, 255, 255;
 
-  --background-color: #3e2723;
+  --background-color: #940920;
   --primary-color: #1c1110;
   --accent-color: #f3e5f5;
   --foreground-color: #e0e0e0;
-  --highlight-color: #ffd700;
-  --accent-color-alt: #006400;
+  --highlight-color: #ffffff;
+  --accent-color-alt: #00aa00;
   --primary-color-alt: #420101;
   --shadow-color: #1f1e1e;
 }
@@ -21,8 +20,11 @@
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(to bottom, transparent, rgb(0, 0, 0));
+  background-repeat: no-repeat;
+  color: var(--foreground-color);
+  background-position: bottom center;
+  background-image: url("/pinsa.png");
+  background-color: var(--background-color);
 }
 
 @layer utilities {
