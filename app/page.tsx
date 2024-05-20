@@ -2,6 +2,8 @@
 import { useState, useEffect } from "react";
 
 import DonutChart from "./components/donut-chart";
+import Header from "./components/header";
+
 import styles from "./main.module.css";
 
 export default function Devices() {
@@ -17,6 +19,7 @@ export default function Devices() {
 
   return (
     <main className={`h-screen w-screen ${styles.main}`}>
+      <Header />
       <DonutChart precentComplete={percent} className="h-1/2" />
     </main>
   );
