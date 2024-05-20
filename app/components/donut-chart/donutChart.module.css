@@ -1,0 +1,35 @@
+.donutChart {
+  transform: rotate(-90deg);
+}
+
+.outerCircle {
+  stroke-width: 3;
+  fill: transparent;
+  stroke-dasharray: 100;
+  stroke: var(--accent-color-alt);
+}
+
+.innerCircle {
+  fill: transparent;
+  stroke-width: 0.25;
+  stroke: var(--highlight-color);
+}
+
+.center {
+  fill: transparent;
+}
+
+.text {
+  fill: white;
+  font-weight: bold;
+  justify-content: center;
+  transform: rotate(90deg);
+}
+
+.textLarge {
+  font-size: 7pt;
+}
+
+.textSmall {
+  font-size: 1.5pt;
+}
