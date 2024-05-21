@@ -49,8 +49,8 @@ const DonutChart: React.FC<DonutChartProps> = ({
       className={`${className} ${styles.donutChart}`}
     >
       <circle
-        cx="20.8"
-        cy="21"
+        cx="21"
+        cy="21.2"
         r="20"
         fill="transparent"
         stroke="#FFFFFF"
