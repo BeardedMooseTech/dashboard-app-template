@@ -37,3 +37,7 @@
 .smallLabel {
   font-size: 1pt;
 }
+
+.totalCircle {
+  stroke-dasharray: 1px;
+}

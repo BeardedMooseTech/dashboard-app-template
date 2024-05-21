@@ -54,6 +54,7 @@ const DonutChart: React.FC<DonutChartProps> = ({
         r="20"
         fill="transparent"
         stroke="#FFFFFF"
+        className={styles.totalCircle}
         strokeWidth=".1"
       />
       <circle
@@ -62,15 +63,6 @@ const DonutChart: React.FC<DonutChartProps> = ({
         r="15.9"
         id="inner-circle"
         className={styles.innerCircle}
-      />
-
-      <circle
-        cx="21"
-        cy="21"
-        r="15.9"
-        id="outer-circle"
-        className={styles.outerCircle}
-        strokeDashoffset={100 - percent}
       />
 
       <text
@@ -92,26 +84,34 @@ const DonutChart: React.FC<DonutChartProps> = ({
         PROGRESS
       </text>
 
-      <circle cx="35" cy="34.25" r="3" fill="var(--background-color)" />
-
-      <text className={`${styles.text} ${styles.textSmall}`} x="32.75" y="-35">
+      {/* Goal */}
+      <circle cx="36" cy="34" r="3" fill="var(--background-color)" />
+      <text className={`${styles.text} ${styles.textSmall}`} x="33" y="-36">
         {expected}
       </text>
-      <text className={`${styles.text} ${styles.smallLabel}`} x="33" y="-33.5">
+      <text className={`${styles.text} ${styles.smallLabel}`} x="33.5" y="-34">
         Goal
       </text>
+      {/* End Goal */}
 
-      <circle cx="8.25" cy="6.5" r="3" fill="var(--background-color)" />
-      <text className={`${styles.text} ${styles.textSmall}`} x="5.35" y="-7.95">
+      {/* Actual */}
+      <circle cx="8.35" cy="6.5" r="3" fill="var(--background-color)" />
+      <text className={`${styles.text} ${styles.textSmall}`} x="3.5" y="-8">
         {actual}
       </text>
-      <text
-        className={`${styles.text} ${styles.smallLabel}`}
-        x="4.75"
-        y="-6.35"
-      >
+      <text className={`${styles.text} ${styles.smallLabel}`} x="3" y="-6">
         Done
       </text>
+      {/* End Actual */}
+
+      <circle
+        cx="21"
+        cy="21"
+        r="15.9"
+        id="outer-circle"
+        className={styles.outerCircle}
+        strokeDashoffset={100 - percent}
+      />
     </svg>
   );
 };
