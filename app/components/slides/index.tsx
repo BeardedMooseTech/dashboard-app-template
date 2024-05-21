@@ -4,6 +4,7 @@ import Reveal from "reveal.js";
 
 import "reveal.js/dist/reveal.css";
 import "./slides.css";
+import Header from "./header";
 
 const Slides: React.FC<{
   children: React.ReactNode;
@@ -65,7 +66,7 @@ const Slides: React.FC<{
     // our parent element. Make sure the parent is not 0-height.
     <div className="reveal" ref={deckDivRef}>
       <div className="slides">
-        {title && <h1 className="p-5">{title}</h1>}
+        {title && <Header title={title} />}
         {children}
       </div>
     </div>

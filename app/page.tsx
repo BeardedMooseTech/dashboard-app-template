@@ -1,26 +1,48 @@
 "use client";
-import { useState, useEffect } from "react";
-
 import DonutChart from "./components/donut-chart";
-import Header from "./components/header";
+import Slides from "./components/slides";
 
-import styles from "./main.module.css";
+const Slide: React.FC<{ content: Array<any> }> = ({ content }) => {
+  console.log(content.length);
 
-export default function Devices() {
-  const [percent, setPercent] = useState(0);
+  const templateCols = content.length > 3 ? 3 : content.length;
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setPercent((prev) => (prev + 1) % 101);
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, []);
+  const slideStyles: React.CSSProperties = {
+    display: "grid",
+    gridTemplateColumns: `repeat(${templateCols}, 1fr)`,
+  };
 
   return (
-    <main className={`h-screen w-screen ${styles.main}`}>
-      <Header />
-      <DonutChart precentComplete={percent} className="h-3/4" />
-    </main>
+    <section className="h-full w-full">
+      <div style={slideStyles} className="h-full w-full">
+        {content.map((slide, index) => (
+          <div
+            key={index}
+            className="h-full w-full flex justify-center items-center"
+          >
+            <DonutChart expected={100} actual={27} className="max-w-2xl p-10" />
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+};
+
+export default function Devices() {
+  return (
+    <Slides title="Demo Dashboard">
+      <Slide content={new Array(1).fill(null)} />
+      <Slide content={new Array(2).fill(null)} />
+      <Slide content={new Array(3).fill(null)} />
+      <Slide content={new Array(4).fill(null)} />
+      <Slide content={new Array(5).fill(null)} />
+      <Slide content={new Array(6).fill(null)} />
+      {/* <Slide content={new Array(1).fill(null)} />
+       <Slide content={new Array(2).fill(null)} />
+       <Slide content={new Array(3).fill(null)} />
+       <Slide content={new Array(4).fill(null)} />
+       <Slide content={new Array(5).fill(null)} />
+       <Slide content={new Array(6).fill(null)} /> */}
+    </Slides>
   );
 }

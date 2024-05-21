@@ -1,10 +1,11 @@
 "use client";
-import { useCallback } from "react";
+import { useCallback, useState, useEffect } from "react";
 
 import styles from "./donutChart.module.css";
 
 export type DonutChartProps = {
-  precentComplete: number;
+  actual: number;
+  expected: number;
 
   className?: string;
   style?: React.CSSProperties;
@@ -12,18 +13,29 @@ export type DonutChartProps = {
 
 const DonutChart: React.FC<DonutChartProps> = ({
   style = {},
-  precentComplete,
+  expected,
+  actual,
   className = "h-96 w-96",
 }) => {
+  const [percent, setPercent] = useState(0);
+
   const calcX = useCallback(() => {
-    if (precentComplete < 10) {
+    if (percent < 10) {
       return "15";
-    } else if (precentComplete < 100) {
+    } else if (percent < 100) {
       return "13";
     } else {
       return "8";
     }
-  }, [precentComplete]);
+  }, [percent]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setPercent((prev) => (prev + 1) % 101);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <svg
@@ -45,7 +57,7 @@ const DonutChart: React.FC<DonutChartProps> = ({
         r="15.9"
         id="outer-circle"
         className={styles.outerCircle}
-        strokeDashoffset={100 - precentComplete}
+        strokeDashoffset={100 - percent}
       />
 
       <text
@@ -53,7 +65,7 @@ const DonutChart: React.FC<DonutChartProps> = ({
         x={calcX()}
         y="-42%"
       >
-        {`${precentComplete}%`}
+        {`${percent}%`}
       </text>
       <text className={`${styles.text} ${styles.textSmall}`} x="15.5" y="-14">
         PROGRESS
