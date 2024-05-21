@@ -97,7 +97,7 @@ const DonutChart: React.FC<DonutChartProps> = ({
       {/* Actual */}
       <circle cx="8.35" cy="6.5" r="3" fill="var(--background-color)" />
       <text className={`${styles.text} ${styles.textSmall}`} x="3.5" y="-8">
-        {actual}
+        {percent}
       </text>
       <text className={`${styles.text} ${styles.smallLabel}`} x="3" y="-6">
         Done
