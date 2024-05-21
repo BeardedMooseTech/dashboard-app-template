@@ -21,7 +21,6 @@
 
 .text {
   fill: white;
-  font-weight: bold;
   justify-content: center;
   transform: rotate(90deg);
 }
@@ -31,5 +30,10 @@
 }
 
 .textSmall {
+  font-weight: bold;
   font-size: 1.5pt;
+}
+
+.smallLabel {
+  font-size: 1pt;
 }
