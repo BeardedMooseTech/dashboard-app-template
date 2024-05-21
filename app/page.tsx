@@ -1,6 +1,8 @@
 "use client";
 import DonutChart from "./components/donut-chart";
-import Slides from "./components/slides";
+import dynamic from "next/dynamic";
+
+const Slides = dynamic(() => import("@/app/components/slides"), { ssr: false });
 
 const slideStyles: React.CSSProperties = {
   display: "flex",
