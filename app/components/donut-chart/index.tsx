@@ -17,7 +17,9 @@ const DonutChart: React.FC<DonutChartProps> = ({
   actual,
   className = "h-96 w-96",
 }) => {
-  const [percent, setPercent] = useState(0);
+  const [percent, setPercent] = useState(
+    Math.floor(Math.random() * 20) + 1 || 0
+  );
 
   const calcX = useCallback(() => {
     if (percent < 10) {
