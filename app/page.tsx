@@ -2,25 +2,22 @@
 import DonutChart from "./components/donut-chart";
 import Slides from "./components/slides";
 
+const slideStyles: React.CSSProperties = {
+  display: "flex",
+  flexWrap: "wrap",
+};
+
 const Slide: React.FC<{ content: Array<any> }> = ({ content }) => {
-  console.log(content.length);
-
-  const templateCols = content.length > 3 ? 3 : content.length;
-
-  const slideStyles: React.CSSProperties = {
-    display: "grid",
-    gridTemplateColumns: `repeat(${templateCols}, 1fr)`,
-  };
-
   return (
     <section className="h-full w-full">
       <div style={slideStyles} className="h-full w-full">
         {content.map((slide, index) => (
-          <div
-            key={index}
-            className="h-full w-full flex justify-center items-center"
-          >
-            <DonutChart expected={100} actual={27} className="max-w-2xl p-10" />
+          <div key={index} className="flex-1 flex justify-center items-center">
+            <DonutChart
+              expected={100}
+              actual={27}
+              className="max-w-2xl p-10 min-w-96"
+            />
           </div>
         ))}
       </div>
