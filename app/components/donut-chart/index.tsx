@@ -63,13 +63,21 @@ const DonutChart: React.FC<DonutChartProps> = ({
       />
 
       <text
+        className={`${styles.text} ${styles.textSmall} font-normal`}
+        x="16"
+        y="-26.5"
+      >
+        MO12345
+      </text>
+
+      <text
         className={`${styles.text} ${styles.textLarge}`}
         x={calcX()}
         y="-42%"
       >
         {`${percent}%`}
       </text>
-      <text className={`${styles.text} ${styles.textSmall}`} x="15.5" y="-14">
+      <text className={`${styles.text} ${styles.textSmall}`} x="15.25" y="-14">
         PROGRESS
       </text>
     </svg>
