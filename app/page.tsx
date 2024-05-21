@@ -18,7 +18,7 @@ const Slide: React.FC<{ content: Array<any> }> = ({ content }) => {
             <DonutChart
               expected={100}
               actual={27}
-              className="max-w-3xl p-10 w-full h-full"
+              className="max-w-2xl p-10 w-full h-full"
               style={{ minWidth: 550, minHeight: 550 }}
             />
           </div>
