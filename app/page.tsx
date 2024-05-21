@@ -18,7 +18,8 @@ const Slide: React.FC<{ content: Array<any> }> = ({ content }) => {
             <DonutChart
               expected={100}
               actual={27}
-              className="max-w-2xl p-10 min-w-96"
+              className="max-w-3xl p-10 w-full h-full"
+              style={{ minWidth: 550, minHeight: 550 }}
             />
           </div>
         ))}
@@ -36,12 +37,6 @@ export default function Devices() {
       <Slide content={new Array(4).fill(null)} />
       <Slide content={new Array(5).fill(null)} />
       <Slide content={new Array(6).fill(null)} />
-      {/* <Slide content={new Array(1).fill(null)} />
-       <Slide content={new Array(2).fill(null)} />
-       <Slide content={new Array(3).fill(null)} />
-       <Slide content={new Array(4).fill(null)} />
-       <Slide content={new Array(5).fill(null)} />
-       <Slide content={new Array(6).fill(null)} /> */}
     </Slides>
   );
 }
