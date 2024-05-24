@@ -3,16 +3,19 @@ import { useEffect, useRef } from "react";
 import Reveal from "reveal.js";
 
 import "reveal.js/dist/reveal.css";
+import Header from "../header";
+
 import "./slides.css";
-import Header from "./header";
 
 const Slides: React.FC<{
   children: React.ReactNode;
   opts?: Reveal.Options;
   title?: string;
+  className?: string;
 }> = ({
   title,
   children,
+  className = "",
   opts = {
     disableLayout: true,
     autoSlide: 30000,
@@ -64,11 +67,8 @@ const Slides: React.FC<{
   return (
     // Your presentation is sized based on the width and height of
     // our parent element. Make sure the parent is not 0-height.
-    <div className="reveal" ref={deckDivRef}>
-      <div className="slides">
-        {title && <Header title={title} />}
-        {children}
-      </div>
+    <div className={`reveal ${className}`} ref={deckDivRef}>
+      <div className="slides">{children}</div>
     </div>
   );
 };
