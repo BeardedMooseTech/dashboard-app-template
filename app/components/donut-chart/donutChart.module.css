@@ -1,7 +1,7 @@
 .donutChart {
   transform: rotate(-90deg);
-  min-width: 500px;
-  max-width: 500px;
+  min-width: 550px;
+  max-width: 400px;
 }
 
 .outerCircle {
