@@ -1,7 +1,9 @@
 .main {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  /* display: grid;
-  grid-template-columns: repeat(3, 1fr); */
+  grid-template-rows: 64px 1fr;
+}
+
+@media only screen and (max-width: 600px) {
+  .main {
+    padding: 15px;
+  }
 }

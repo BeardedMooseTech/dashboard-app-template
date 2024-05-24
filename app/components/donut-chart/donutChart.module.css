@@ -1,5 +1,7 @@
 .donutChart {
   transform: rotate(-90deg);
+  min-width: 500px;
+  max-width: 500px;
 }
 
 .outerCircle {
@@ -40,4 +42,10 @@
 
 .totalCircle {
   stroke-dasharray: 1px;
+}
+
+@media only screen and (max-width: 600px) {
+  .donutChart {
+    min-width: 300px;
+  }
 }

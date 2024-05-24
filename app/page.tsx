@@ -4,9 +4,13 @@ import dynamic from "next/dynamic";
 
 const Slides = dynamic(() => import("@/app/components/slides"), { ssr: false });
 
+import styles from "./main.module.css";
+import Header from "./components/header";
+
 const slideStyles: React.CSSProperties = {
   display: "flex",
   flexWrap: "wrap",
+  overflow: "auto",
 };
 
 const Slide: React.FC<{ content: Array<any> }> = ({ content }) => {
@@ -16,11 +20,10 @@ const Slide: React.FC<{ content: Array<any> }> = ({ content }) => {
         {content.map((slide, index) => (
           <div key={index} className="flex-1 flex justify-center items-center">
             <DonutChart
-              expected={100}
               actual={27}
+              expected={100}
+              className="max-w-3xl w-full h-full"
               manufacturingOrder={`MO12345${index}`}
-              className="max-w-2xl p-10 w-full h-full"
-              style={{ minWidth: 550, minHeight: 550 }}
             />
           </div>
         ))}
@@ -31,13 +34,16 @@ const Slide: React.FC<{ content: Array<any> }> = ({ content }) => {
 
 export default function Devices() {
   return (
-    <Slides title="Demo Dashboard">
-      <Slide content={new Array(1).fill(null)} />
-      <Slide content={new Array(2).fill(null)} />
-      <Slide content={new Array(3).fill(null)} />
-      <Slide content={new Array(4).fill(null)} />
-      <Slide content={new Array(5).fill(null)} />
-      <Slide content={new Array(6).fill(null)} />
-    </Slides>
+    <div className={`${styles.main} w-screen h-screen`}>
+      <Header title="Sample PINSA Dashboard" />
+      <Slides className="h-full w-full">
+        <Slide content={new Array(1).fill(null)} />
+        <Slide content={new Array(2).fill(null)} />
+        <Slide content={new Array(3).fill(null)} />
+        <Slide content={new Array(4).fill(null)} />
+        <Slide content={new Array(5).fill(null)} />
+        <Slide content={new Array(6).fill(null)} />
+      </Slides>
+    </div>
   );
 }
