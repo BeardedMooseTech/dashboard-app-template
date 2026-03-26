@@ -26,11 +26,11 @@ const DonutChart: React.FC<DonutChartProps> = ({
 
   const calcX = useCallback(() => {
     if (percent < 10) {
-      return "15";
+      return "17";
     } else if (percent < 100) {
-      return "13";
+      return "15.5";
     } else {
-      return "8";
+      return "13";
     }
   }, [percent]);
 
@@ -64,10 +64,10 @@ const DonutChart: React.FC<DonutChartProps> = ({
         id="inner-circle"
         className={styles.innerCircle}
       />
-
+      
       <text
         className={`${styles.text} ${styles.textSmall} font-normal`}
-        x="15.25"
+        x="17.25"
         y="-26.5"
       >
         {manufacturingOrder}
@@ -80,7 +80,7 @@ const DonutChart: React.FC<DonutChartProps> = ({
       >
         {`${percent}%`}
       </text>
-      <text className={`${styles.text} ${styles.textSmall}`} x="15.25" y="-14">
+      <text className={`${styles.text} ${styles.textSmall}`} x="17.25" y="-14">
         PROGRESS
       </text>
 
@@ -99,7 +99,7 @@ const DonutChart: React.FC<DonutChartProps> = ({
       <text className={`${styles.text} ${styles.textSmall}`} x="3.5" y="-8">
         {percent}
       </text>
-      <text className={`${styles.text} ${styles.smallLabel}`} x="3" y="-6">
+      <text className={`${styles.text} ${styles.smallLabel}`} x="3.5" y="-6">
         Done
       </text>
       {/* End Actual */}
