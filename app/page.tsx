@@ -24,15 +24,25 @@ export default function Devices() {
           <DonutChart precentComplete={percent} className="h-1/2" />
         </div>
       </section>
-      {/* <section className="h-full w-full">
-        <section className="h-full w-full flex justify-center items-center">
-          Slide 1.2
-        </section>
-      </section> */}
       <section className="h-full w-full">
-        <div className="h-full w-full grid items-center">
-          <h1 className="text-4xl font-bold text-center">Slide 2</h1>
-        </div>
+        <section className="h-full w-full flex justify-center items-center">
+          <div className="h-full w-full grid items-center">Slide 1.2</div>
+        </section>
+        <section className="h-full w-full flex justify-center items-center">
+          <div className="h-full w-full grid items-center">Slide 1.3</div>
+        </section>
+      </section>
+      <section className="h-full w-full">
+        <section className="h-full w-full flex justify-center items-center">
+          <div className="h-full w-full grid items-center">
+            <h1 className="text-4xl font-bold text-center">Slide 2</h1>
+          </div>
+        </section>
+        <section className="h-full w-full flex justify-center items-center">
+          <div className="h-full w-full grid items-center">
+            <h1 className="text-4xl font-bold text-center">Slide 3</h1>
+          </div>
+        </section>
       </section>
     </Slides>
   );
