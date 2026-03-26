@@ -45,5 +45,6 @@ export default function Devices() {
         <Slide content={new Array(6).fill(null)} />
       </Slides>
     </div>
+
   );
 }
