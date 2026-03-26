@@ -6,7 +6,7 @@
   --control-color: #ffffff;
   --foreground-rgb: 255, 255, 255;
 
-  --background-color: rgb(200, 16, 46);
+  --background-color: rgb(150, 12, 35);
   --primary-color: #1c1110;
   --accent-color: #f3e5f5;
   --foreground-color: #e0e0e0;
@@ -25,6 +25,7 @@ body {
   background-position: bottom center;
   background-image: url("/pinsa.png");
   background-color: var(--background-color);
+  background-size: 45%;
 }
 
 @layer utilities {

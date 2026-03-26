@@ -9,7 +9,7 @@ export type HeaderProps = {
 const Header: React.FC<HeaderProps> = ({ title }) => {
   return (
     <header className={styles.header}>
-      <Image src="/logo.png" alt="Pinsa Romana" width={50} height={50} />
+      <Image src="/logo.png" alt="Pedone Pinsa" width={50} height={50} />
       <h3 className="text-3xl font-bold">{title}</h3>
       <h3 className="text-xl font-bold">{new Date().toLocaleDateString()}</h3>
     </header>
