@@ -6,14 +6,15 @@ import styles from "./donutChart.module.css";
 export type DonutChartProps = {
   actual: number;
   expected: number;
-  manufacturingOrder: string;
-
-  className?: string;
   style?: React.CSSProperties;
+  manufacturingOrder: string;
+  className?: string;
+  alt?: boolean;
 };
 
 const DonutChart: React.FC<DonutChartProps> = ({
   actual,
+  alt,
   expected,
   manufacturingOrder = "MO123456",
 
@@ -53,7 +54,7 @@ const DonutChart: React.FC<DonutChartProps> = ({
         cy="21.2"
         r="20"
         fill="transparent"
-        stroke="#FFFFFF"
+        stroke={alt ? "red" : "#FFFFFF"}
         className={styles.totalCircle}
         strokeWidth=".1"
       />
@@ -66,40 +67,43 @@ const DonutChart: React.FC<DonutChartProps> = ({
       />
       
       <text
-        className={`${styles.text} ${styles.textSmall} font-normal`}
+        className={`${alt ? "fill-red" : "fill-white"} ${styles.text} ${styles.textSmall} font-normal`}
         x="17.25"
         y="-26.5"
+        style={{
+          color: alt ? "red" : "white",
+        }}
       >
         {manufacturingOrder}
       </text>
 
       <text
-        className={`${styles.text} ${styles.textLarge}`}
+        className={`${alt ? "fill-red" : "fill-white"} ${styles.text} ${styles.textLarge}`}
         x={calcX()}
         y="-42%"
       >
         {`${percent}%`}
       </text>
-      <text className={`${styles.text} ${styles.textSmall}`} x="17.25" y="-14">
+      <text className={ `${alt ? "fill-red" : "fill-white"} ${styles.text} ${styles.textSmall}`} x="17.25" y="-14">
         PROGRESS
       </text>
 
       {/* Goal */}
       <circle cx="36" cy="34" r="3" fill="var(--background-color)" />
-      <text className={`${styles.text} ${styles.textSmall}`} x="33" y="-36">
+      <text className={`${alt ? "fill-red" : "fill-white"} ${styles.text} ${styles.textSmall}`} x="33" y="-36">
         {expected}
       </text>
-      <text className={`${styles.text} ${styles.smallLabel}`} x="33.5" y="-34">
+      <text className={`${alt ? "fill-red" : "fill-white"} ${styles.text} ${styles.smallLabel}`} x="33.5" y="-34">
         Goal
       </text>
       {/* End Goal */}
 
       {/* Actual */}
       <circle cx="8" cy="4.5" r="2.75" fill="var(--background-color)" />
-      <text className={`${styles.text} ${styles.textSmall}`} x="3.5" y="-8">
+      <text className={`${alt ? "fill-red" : "fill-white"} ${styles.text} ${styles.textSmall}`} x="3.5" y="-8">
         {percent}
       </text>
-      <text className={`${styles.text} ${styles.smallLabel}`} x="3.5" y="-6">
+      <text className={`${alt ? "fill-red" : "fill-white"} ${styles.text} ${styles.smallLabel}`} x="3.5" y="-6" >
         Done
       </text>
       {/* End Actual */}

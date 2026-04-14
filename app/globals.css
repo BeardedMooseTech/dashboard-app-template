@@ -3,17 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --control-color: #ffffff;
-  --foreground-rgb: 255, 255, 255;
-
-  --background-color: rgb(150, 12, 35);
-  --primary-color: #1c1110;
-  --accent-color: #f3e5f5;
-  --foreground-color: #e0e0e0;
-  --highlight-color: #ffffff;
-  --accent-color-alt: #00aa00;
-  --primary-color-alt: #420101;
-  --shadow-color: #1f1e1e;
+  
 }
 
 @media (prefers-color-scheme: dark) {

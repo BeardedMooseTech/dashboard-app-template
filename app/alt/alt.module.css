@@ -1,0 +1,20 @@
+:root {
+  --control-color: red;
+  --foreground-rgb: 0, 0, 0;
+  --background-color: transparent;
+  --primary-color: #1c1110;
+  --accent-color: red;
+  --foreground-color: red;
+  --highlight-color: red;
+  --accent-color-alt: #00aa00;
+  --primary-color-alt: transparent;
+  --shadow-color: #1f1e1e;
+}
+
+body {
+  background-repeat: no-repeat;
+  color: red;
+  background-position: bottom center;
+  background-image: url("/bg.png");
+  background-size: cover;
+}

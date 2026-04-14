@@ -22,7 +22,6 @@
 }
 
 .text {
-  fill: white;
   justify-content: center;
   transform: rotate(90deg);
 }
