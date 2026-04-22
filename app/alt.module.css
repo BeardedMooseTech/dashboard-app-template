@@ -1,4 +1,4 @@
-:root {
+.main {
   --control-color: red;
   --foreground-rgb: 0, 0, 0;
   --background-color: transparent;
@@ -9,21 +9,9 @@
   --accent-color-alt: #00aa00;
   --primary-color-alt: transparent;
   --shadow-color: #1f1e1e;
-}
-
-body {
   background-repeat: no-repeat;
   color: red;
   background-position: bottom center;
   background-image: url("/bg.png");
   background-size: cover;
-}
-
-.slides {
-  background-repeat: no-repeat;
-  color: var(--foreground-color);
-  background-position: bottom center;
-  background-image: url("/pinsa.png");
-  background-color: var(--background-color);
-  background-size: 45%;
 }
