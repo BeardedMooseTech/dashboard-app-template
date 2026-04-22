@@ -7,6 +7,9 @@ import dynamic from "next/dynamic";
 
 const Slides = dynamic(() => import("@/app/components/slides"), { ssr: false });
 
+
+
+
 function DevicesContent() {
   const searchParams = useSearchParams();
   const theme = searchParams.get("theme");
@@ -73,7 +76,9 @@ function DevicesContent() {
         <Slide alt={isAltTheme} title="To Close">
           <Box sx={{ margin: `1em 2em 0 2em`, width: "100%" }}>
             <Stack spacing={5}>
-              {new Array(4).fill(null).map((_, index) => (
+              {new Array(4).fill(null).map((_, index) => {
+                const offset = index  * 10;
+                return (
                 <Paper key={index} elevation={4} sx={{ padding: "1em", backgroundColor: "transparent", color: isAltTheme ? "#000" : "#fff" }}>
                   <Stack spacing={2}>
                   <Typography variant="h1" gutterBottom>
@@ -82,8 +87,8 @@ function DevicesContent() {
                   <LinearProgress
                     key={index}
                     variant="buffer"
-                    value={progress}
-                    valueBuffer={buffer}
+                    value={progress < 100 ? progress - offset : 100}
+                    
                     sx={{
                       height: "4em",
                       borderRadius: "5em",
@@ -103,7 +108,7 @@ function DevicesContent() {
                   />
                   </Stack>
                 </Paper>
-              ))}
+              )})}
             </Stack>
           </Box>
         </Slide>
