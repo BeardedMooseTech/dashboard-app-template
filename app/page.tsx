@@ -88,7 +88,7 @@ function DevicesContent() {
                     key={index}
                     variant="buffer"
                     value={progress < 100 ? progress - offset : 100}
-                    
+                    valueBuffer={100}
                     sx={{
                       height: "4em",
                       borderRadius: "5em",
