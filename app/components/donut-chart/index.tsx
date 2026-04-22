@@ -27,11 +27,11 @@ const DonutChart: React.FC<DonutChartProps> = ({
 
   const calcX = useCallback(() => {
     if (percent < 10) {
-      return "17";
+      return "15";
     } else if (percent < 100) {
-      return "15.5";
-    } else {
       return "13";
+    } else {
+      return "10";
     }
   }, [percent]);
 
@@ -68,7 +68,7 @@ const DonutChart: React.FC<DonutChartProps> = ({
       
       <text
         className={`${alt ? "fill-red" : "fill-white"} ${styles.text} ${styles.textSmall} font-normal`}
-        x="17.25"
+        x="16"
         y="-26.5"
         style={{
           color: alt ? "red" : "white",
@@ -84,7 +84,7 @@ const DonutChart: React.FC<DonutChartProps> = ({
       >
         {`${percent}%`}
       </text>
-      <text className={ `${alt ? "fill-red" : "fill-white"} ${styles.text} ${styles.textSmall}`} x="17.25" y="-14">
+      <text className={ `${alt ? "fill-red" : "fill-white"} ${styles.text} ${styles.textSmall}`} x="16" y="-14">
         PROGRESS
       </text>
 
@@ -99,11 +99,11 @@ const DonutChart: React.FC<DonutChartProps> = ({
       {/* End Goal */}
 
       {/* Actual */}
-      <circle cx="8" cy="4.5" r="2.75" fill="var(--background-color)" />
-      <text className={`${alt ? "fill-red" : "fill-white"} ${styles.text} ${styles.textSmall}`} x="3.5" y="-8">
+      <circle cx="8.75" cy="4.9" r="1.75" fill="var(--background-color)" />
+      <text className={`${alt ? "fill-red" : "fill-white"} ${styles.text} ${styles.textSmall}`} x="3.75" y="-8">
         {percent}
       </text>
-      <text className={`${alt ? "fill-red" : "fill-white"} ${styles.text} ${styles.smallLabel}`} x="3.5" y="-6" >
+      <text className={`${alt ? "fill-red" : "fill-white"} ${styles.text} ${styles.smallLabel}`} x="3" y="-6" >
         Done
       </text>
       {/* End Actual */}

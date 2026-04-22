@@ -5,19 +5,29 @@
 :root {
   
 }
-/* 
 @media (prefers-color-scheme: dark) {
 }
 
 body {
-  background-repeat: no-repeat;
-  color: var(--foreground-color);
-  background-position: bottom center;
-  background-image: url("/pinsa.png");
-  background-color: var(--background-color);
-  background-size: 45%;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.MuiTypography-h1,
+.MuiTypography-h2,
+.MuiTypography-h3,
+.MuiTypography-h4,
+.MuiTypography-h5,
+.MuiTypography-h6 {
+  font-family: var(--font-kapra-semibold), sans-serif;
+}
+
+  /* 
+  
 @layer utilities {
   .text-balance {
     text-wrap: balance;
