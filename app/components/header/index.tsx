@@ -40,7 +40,7 @@ const Header: React.FC<HeaderProps> = ({ title, alt }) => {
           {title}
         </Typography>
         <div className="flex items-center gap-4">
-          <Typography component="div" variant="h4" sx={{ color: alt ? "#000" : "#fff" }}>
+          <Typography component="div" variant="h6" sx={{ color: alt ? "#000" : "#fff" }}>
             {new Date().toLocaleDateString()}
           </Typography>
           <IconButton
