@@ -3,9 +3,31 @@ import { useEffect, useRef } from "react";
 import Reveal from "reveal.js";
 
 import "reveal.js/dist/reveal.css";
-import Header from "../header";
 
 import "./slides.css";
+
+const DEFAULT_OPTS: Reveal.Options = {
+  disableLayout: true,
+  autoSlide: 30000,
+  transition: "fade",
+  autoAnimate: true,
+  loop: true,
+  autoAnimateStyles: [
+    "opacity",
+    "color",
+    "background-color",
+    "padding",
+    "font-size",
+    "line-height",
+    "letter-spacing",
+    "border-width",
+    "border-color",
+    "border-radius",
+    "outline",
+    "outline-offset",
+  ],
+  autoAnimateEasing: "ease",
+};
 
 const Slides: React.FC<{
   children: React.ReactNode;
@@ -16,37 +38,17 @@ const Slides: React.FC<{
   title,
   children,
   className = "",
-  opts = {
-    disableLayout: true,
-    autoSlide: 30000,
-    transition: "slide",
-    autoAnimate: true,
-    loop: true,
-    autoAnimateStyles: [
-      "opacity",
-      "color",
-      "background-color",
-      "padding",
-      "font-size",
-      "line-height",
-      "letter-spacing",
-      "border-width",
-      "border-color",
-      "border-radius",
-      "outline",
-      "outline-offset",
-    ],
-    autoAnimateEasing: "ease",
-  },
+  opts,
 }) => {
-  const deckDivRef = useRef<HTMLDivElement>(null); // reference to deck container div
-  const deckRef = useRef<Reveal.Api | null>(null); // reference to deck reveal instance
+  const deckDivRef = useRef<HTMLDivElement>(null);
+  const deckRef = useRef<Reveal.Api | null>(null);
+  const optsRef = useRef<Reveal.Options>(opts ?? DEFAULT_OPTS);
 
   useEffect(() => {
     // Prevents double initialization in strict mode
     if (deckRef.current) return;
 
-    deckRef.current = new Reveal(deckDivRef.current!, opts);
+    deckRef.current = new Reveal(deckDivRef.current!, optsRef.current);
 
     deckRef.current.initialize().then(() => {
       // good place for event handlers and plugin setups
@@ -62,7 +64,7 @@ const Slides: React.FC<{
         console.warn("Reveal.js destroy call failed.");
       }
     };
-  }, [opts]);
+  }, []);
 
   return (
     // Your presentation is sized based on the width and height of

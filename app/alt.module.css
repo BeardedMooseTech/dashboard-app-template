@@ -18,3 +18,12 @@ body {
   background-image: url("/bg.png");
   background-size: cover;
 }
+
+.slides {
+  background-repeat: no-repeat;
+  color: var(--foreground-color);
+  background-position: bottom center;
+  background-image: url("/pinsa.png");
+  background-color: var(--background-color);
+  background-size: 45%;
+}

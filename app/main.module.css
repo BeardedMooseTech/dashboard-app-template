@@ -1,13 +1,10 @@
-.main {
-  grid-template-rows: 64px 1fr;
-}
 
 :root {
   --control-color: #ffffff;
   --foreground-rgb: 255, 255, 255;
 
   --background-color: rgb(150, 12, 35);
-  --primary-color: #1c1110;
+  --primary-color: rgb(150, 12, 35);
   --accent-color: #f3e5f5;
   --foreground-color: #e0e0e0;
   --highlight-color: #ffffff;
@@ -16,8 +13,11 @@
   --shadow-color: #1f1e1e;
 }
 
-@media only screen and (max-width: 600px) {
-  .main {
-    padding: 15px;
-  }
+body {
+  background-repeat: no-repeat;
+  color: var(--foreground-color);
+  background-position: bottom center;
+  background-image: url("/pinsa.png");
+  background-color: var(--background-color);
+  background-size: 45%;
 }
