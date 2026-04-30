@@ -10,7 +10,7 @@ const slideStyles: React.CSSProperties = {
 const Slide: React.FC<{ title: string, content?: Array<any>, alt: boolean, children?: React.ReactNode }> = ({ title, content, alt, children }) => (
   <section className="h-full w-full">
     <Header title={title} alt={alt} />
-    <div style={slideStyles} className="h-full w-full">
+    <div style={slideStyles} className="h-full w-full flex-1 flex justify-center items-center">
       {children ? children : content?.map((slide, index) => (
         <div key={index} className="flex-1 flex justify-center items-center">
           <DonutChart

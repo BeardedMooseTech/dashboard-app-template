@@ -1,0 +1,56 @@
+.themeDefault text {
+  fill: white;
+}
+
+.themeDefault .ringDecor {
+  stroke: white;
+}
+
+.themeAlt text {
+  fill: black;
+}
+
+.themeAlt .ringDecor {
+  stroke: black;
+}
+
+.progressRing {
+  stroke-width: 25;
+  fill: transparent;
+  stroke: var(--accent-color-alt);
+}
+
+.overageRing {
+  stroke-width: 25;
+  fill: transparent;
+  stroke: #0a4a1a;
+}
+
+.inProgress {
+  animation: pulse 2s infinite;
+}
+
+.section {
+  fill: lightgrey;
+}
+
+.done {
+  fill: green;
+}
+
+.done > text {
+  stroke: white;
+}
+
+@keyframes pulse {
+  0% {
+    fill: gold;
+  }
+  50% {
+    fill: #d6e900;
+  }
+  100% {
+    fill: gold
+  }
+  
+}

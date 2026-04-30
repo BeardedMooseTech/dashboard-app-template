@@ -1,14 +1,11 @@
 "use client";
 import { Suspense, useEffect, useState, useRef } from "react";
-import { Stack, LinearProgress, Box, Paper, Typography } from "@mui/material";
+import DonutChartNext from "./components/donut-cart-next";
 import { useSearchParams } from "next/navigation";
 import Slide from "./components/slides/slide";
 import dynamic from "next/dynamic";
 
 const Slides = dynamic(() => import("@/app/components/slides"), { ssr: false });
-
-
-
 
 function DevicesContent() {
   const searchParams = useSearchParams();
@@ -68,49 +65,8 @@ function DevicesContent() {
   return (
     <div className={`${mainClass} w-screen h-screen`}>
       <Slides className="h-full w-full">
-        <Slide
-          alt={isAltTheme}
-          title="In Progress"
-          content={new Array(1).fill(null)}
-        />
-        <Slide alt={isAltTheme} title="To Close">
-          <Box sx={{ margin: `1em 2em 0 2em`, width: "100%" }}>
-            <Stack spacing={5}>
-              {new Array(4).fill(null).map((_, index) => {
-                const offset = index  * 10;
-                return (
-                <Paper key={index} elevation={4} sx={{ padding: "1em", backgroundColor: "transparent", color: isAltTheme ? "#000" : "#fff" }}>
-                  <Stack spacing={2}>
-                  <Typography variant="h1" gutterBottom>
-                    MO12345{index}
-                  </Typography>
-                  <LinearProgress
-                    key={index}
-                    variant="buffer"
-                    value={progress < 100 ? progress - offset : 100}
-                    valueBuffer={100}
-                    sx={{
-                      height: "4em",
-                      borderRadius: "5em",
-                      backgroundColor: "transparent",
-                      "& .MuiLinearProgress-bar1Buffer": {
-                        borderRadius: "5em",
-                        backgroundColor: "var(--accent-color)",
-                      },
-                      "& .MuiLinearProgress-bar2Buffer": {
-                        borderRadius: "5em",
-                        backgroundColor: "var(--primary-color)",
-                      },
-                      "& .MuiLinearProgress-dashed": {
-                        backgroundImage: `radial-gradient(var(--accent-color) 0%, var(--accent-color) 16%, transparent 42%)`,
-                      },
-                    }}
-                  />
-                  </Stack>
-                </Paper>
-              )})}
-            </Stack>
-          </Box>
+        <Slide alt={isAltTheme} title="In Progress">
+          <DonutChartNext productName="A fancy new product" manufacturingOrder="MO12345678" demo alt={isAltTheme} />
         </Slide>
       </Slides>
     </div>
