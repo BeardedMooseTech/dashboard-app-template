@@ -88,7 +88,7 @@ function DevicesContent() {
                 <DonutChartNext
                   key={p.id}
                   productName={p.product_id.name}
-                  manufacturingOrder={p.mo_name}
+                  manufacturingOrder={p.name}
                   goal={p.qty_producing}
                   done={p.scanned_qty}
                   workorder_ids={p.workorder_ids}
