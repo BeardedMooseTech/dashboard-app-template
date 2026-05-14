@@ -1,5 +1,5 @@
 "use client";
-import { Suspense, useEffect, useState, useRef } from "react";
+import { Suspense, useEffect, useState } from "react";
 import DonutChartNext from "./components/donut-cart-next";
 import { useSearchParams } from "next/navigation";
 import Slide from "./components/slides/slide";
@@ -7,11 +7,39 @@ import dynamic from "next/dynamic";
 
 const Slides = dynamic(() => import("@/app/components/slides"), { ssr: false });
 
+type WorkOrder = {
+  id: number;
+  name: string;
+  state: string;
+};
+
+type MrpProduction = {
+  id: number;
+  name: string;
+  state: string;
+  mo_name: string;
+  scanned_qty: number;
+  qty_producing: number;
+  product_id: {
+    id: number;
+    name: string;
+    default_code: string;
+  };
+  workorder_ids: WorkOrder[];
+};
+
+function chunk<T>(arr: T[], size: number): T[][] {
+  return Array.from({ length: Math.ceil(arr.length / size) }, (_, i) =>
+    arr.slice(i * size, i * size + size)
+  );
+}
+
 function DevicesContent() {
   const searchParams = useSearchParams();
   const theme = searchParams.get("theme");
   const isAltTheme = theme === "alt";
   const [mainClass, setMainClass] = useState("");
+  const [productions, setProductions] = useState<MrpProduction[]>([]);
 
   useEffect(() => {
     let isMounted = true;
@@ -33,42 +61,44 @@ function DevicesContent() {
     };
   }, [isAltTheme]);
 
-  const [progress, setProgress] = useState(0);
-  const [buffer, setBuffer] = useState(10);
-
-  const progressRef = useRef(() => {});
   useEffect(() => {
-    progressRef.current = () => {
-      if (progress === 100) {
-        setProgress(0);
-        setBuffer(10);
-      } else {
-        setProgress(progress + 1);
-        if (buffer < 100 && progress % 5 === 0) {
-          const newBuffer = buffer + 1 + Math.random() * 10;
-          setBuffer(newBuffer > 100 ? 100 : newBuffer);
-        }
+    const fetchData = async () => {
+      try {
+        const res = await fetch("/api/dashboards", { method: "POST" });
+        const json = await res.json();
+        setProductions(json?.result?.MrpProduction ?? []);
+      } catch (e) {
+        console.error(e);
       }
     };
-  });
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      progressRef.current();
-    }, 100);
-
-    return () => {
-      clearInterval(timer);
-    };
+    const refreshMs = Number(process.env.NEXT_PUBLIC_REFRESH_INTERVAL) || 30000;
+    fetchData();
+    const interval = setInterval(fetchData, refreshMs);
+    return () => clearInterval(interval);
   }, []);
 
   return (
     <div className={`${mainClass} w-screen h-screen`}>
-      <Slides className="h-full w-full">
-        <Slide alt={isAltTheme} title="In Progress">
-          <DonutChartNext productName="A fancy new product" manufacturingOrder="MO12345678" demo alt={isAltTheme} />
-        </Slide>
-      </Slides>
+      {productions.length > 0 && (
+        <Slides className="h-full w-full">
+          {chunk(productions, 3).map((group, i) => (
+            <Slide key={i} alt={isAltTheme} title="In Progress">
+              {group.map((p) => (
+                <DonutChartNext
+                  key={p.id}
+                  productName={p.product_id.name}
+                  manufacturingOrder={p.mo_name}
+                  goal={p.qty_producing}
+                  done={p.scanned_qty}
+                  workorder_ids={p.workorder_ids}
+                  alt={isAltTheme}
+                />
+              ))}
+            </Slide>
+          ))}
+        </Slides>
+      )}
     </div>
   );
 }

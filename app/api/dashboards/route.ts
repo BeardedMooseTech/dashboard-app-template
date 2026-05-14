@@ -23,19 +23,22 @@ export async function POST() {
             {
               query: `
               query {
-                StockPicking(domain:[["state", "=", "assigned"], ["picking_type_id.name", "in", ["Pick", "Delivery Orders"]]]) {
-                  
+              MrpProduction(domain:[
+                  ["product_id.default_code", "ilike", "WBF"],
+                  ["state", "=", "progress"],
+                ]) {
+                  name
                   state
-                  display_name
-                  picking_type_id {
+                  mo_name
+                  scanned_qty
+                  qty_producing
+                  product_id {
                     name
-                    display_name
-                    id
+                    default_code
                   }
-                  sale_id {
-                    id
+                  workorder_ids {
                     name
-                    display_name
+                    state
                   }
                 }
               }`,
@@ -46,6 +49,8 @@ export async function POST() {
     });
 
     const { result } = await response.json();
+
+    console.log("API Result:", result);
 
     return NextResponse.json({
       result,

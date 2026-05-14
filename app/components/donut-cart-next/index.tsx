@@ -26,14 +26,61 @@ const Check: React.FC<tCheckProps> = ({ svgProps }) => {
   );
 };
 
+export type WorkOrder = {
+  id: number;
+  name: string;
+  state: string;
+};
+
 export type tDonutChartNextProps = {
   productName: string;
   manufacturingOrder: string;
   goal?: number;
   done?: number;
+  workorder_ids?: WorkOrder[];
   demo?: boolean;
   alt?: boolean;
 };
+
+type SectionKey = "doughballing" | "proofing" | "stretching" | "baking";
+
+const SECTION_KEYWORDS: Record<SectionKey, string[]> = {
+  doughballing: ["doughball", "bola de masa"],
+  proofing:     ["proofing", "esponjado"],
+  stretching:   ["stretching", "estrechar"],
+  baking:       ["baking", "horneando"],
+};
+
+function getSectionStates(workorders: WorkOrder[]): Record<SectionKey, string> {
+  const states: Record<SectionKey, string> = {
+    doughballing: "waiting",
+    proofing:     "waiting",
+    stretching:   "waiting",
+    baking:       "waiting",
+  };
+  for (const wo of workorders) {
+    const lower = wo.name.toLowerCase();
+    for (const [key, keywords] of Object.entries(SECTION_KEYWORDS) as [SectionKey, string[]][]) {
+      if (keywords.some((k) => lower.includes(k))) {
+        states[key] = wo.state;
+        break;
+      }
+    }
+  }
+  return states;
+}
+
+function sectionClass(state: string, styles: Record<string, string>) {
+  if (state === "done")     return `${styles.section} ${styles.done}`;
+  if (state === "progress") return `${styles.section} ${styles.inProgress}`;
+  return styles.section;
+}
+
+function sectionTextStyle(state: string, alt?: boolean): React.CSSProperties | undefined {
+  if (state === "waiting") return { fill: "black" };
+  if (state === "progress") return { fill: alt ? undefined : "rgb(150, 12, 35)", fontWeight: "bold" };
+  return undefined;
+}
 
 const RING_RADIUS = 200;
 const CIRCUMFERENCE = 2 * Math.PI * RING_RADIUS;
@@ -45,9 +92,11 @@ const DonutChartNext: React.FC<tDonutChartNextProps> = ({
   manufacturingOrder,
   goal = 0,
   done = 0,
+  workorder_ids = [],
   demo = false,
   alt,
 }) => {
+  const sections = getSectionStates(workorder_ids);
   const effectiveGoal = demo ? 100 : goal;
   const [demoDone, setDemoDone] = useState(0);
   const effectiveDone = demo ? demoDone : done;
@@ -107,7 +156,7 @@ const DonutChartNext: React.FC<tDonutChartNextProps> = ({
         <g id="donut-chart" transform="translate(-75, -75)">
           <g id="top-right">
             <path
-              className={`${styles.section} ${styles.done}`}
+              className={sectionClass(sections.doughballing, styles)}
               d="m 391.09287,319.37667 c -0.51291,-0.6875 -1.7437,-3.12336 -2.7351,-5.41302 -2.32582,-5.37153 -6.8112,-9.66006 -13.07725,-12.50331 -4.55356,-2.06619 -6.8081,-2.30316 -25.25,-2.65389 l -20.25,-0.38512 V 225.024 151.62667 h 7.90063 c 15.66963,0 39.97834,5.51271 57.36834,13.00995 38.65372,16.66452 70.36776,47.42609 88.17011,85.52208 9.1972,19.68146 15.56093,45.26873 15.56093,62.56734 v 7.90063 h -53.37756 c -41.53801,0 -53.5844,-0.27726 -54.3101,-1.25 z"
               id="doughballing"
             />
@@ -118,7 +167,7 @@ const DonutChartNext: React.FC<tDonutChartNextProps> = ({
                 fill="none"
               />
             </defs>
-            <text fontSize="18">
+            <text fontSize="18" style={sectionTextStyle(sections.doughballing, alt)}>
               <textPath
                 href="#curve-top-right"
                 startOffset="43%"
@@ -127,18 +176,13 @@ const DonutChartNext: React.FC<tDonutChartNextProps> = ({
                 Doughballing
               </textPath>
             </text>
-            { true && (
-              <Check
-                svgProps={{
-                  x: 365,
-                  y: 230,
-                }}
-              />
+            {sections.doughballing === "done" && (
+              <Check svgProps={{ x: 365, y: 230 }} />
             )}
           </g>
           <g id="bottom-right">
             <path
-              className={`${styles.inProgress} ${styles.section}`}
+              className={sectionClass(sections.proofing, styles)}
               d="m 329.78052,426.37795 v -73.54594 l 20.25,-0.39545 c 18.40117,-0.35935 20.71729,-0.60304 25.36826,-2.66914 6.22848,-2.76688 10.44545,-7.00839 13.56182,-13.64075 l 2.34938,-5 53.73527,-0.25869 53.73528,-0.25868 v 7.90931 c 0,15.67813 -5.51104,39.98315 -13.00995,57.37703 -25.3249,58.74163 -83.58161,100.38428 -144.74006,103.46208 l -11.25,0.56616 z"
               id="proofing"
             />
@@ -149,7 +193,7 @@ const DonutChartNext: React.FC<tDonutChartNextProps> = ({
                 fill="none"
               />
             </defs>
-            <text fontSize="18">
+            <text fontSize="18" style={sectionTextStyle(sections.proofing, alt)}>
               <textPath
                 href="#curve-bottom-right"
                 startOffset="43%"
@@ -158,18 +202,13 @@ const DonutChartNext: React.FC<tDonutChartNextProps> = ({
                 Proofing
               </textPath>
             </text>
-            { false && (
-              <Check
-                svgProps={{
-                  x: 365,
-                  y: 375,
-                }}
-              />
+            {sections.proofing === "done" && (
+              <Check svgProps={{ x: 365, y: 375 }} />
             )}
           </g>
           <g id="bottom-left">
             <path
-              className={`${styles.section}`}
+              className={sectionClass(sections.stretching, styles)}
               d="M 292.28052,497.6949 C 258.44096,491.71163 228.77925,476.74895 203.99547,453.16002 172.49711,423.1802 153.08791,382.38255 151.04904,341.86791 l -0.56658,-11.25876 53.8843,0.25876 53.88431,0.25876 2.34937,5 c 3.11638,6.63236 7.33334,10.87387 13.56182,13.64075 4.65096,2.0661 6.96708,2.30979 25.36826,2.66914 l 20.25,0.39545 v 73.39733 73.39733 l -8.75,-0.0818 c -4.8125,-0.045 -13.25,-0.87747 -18.75,-1.84995 z"
               id="stretching"
             />
@@ -180,7 +219,7 @@ const DonutChartNext: React.FC<tDonutChartNextProps> = ({
                 fill="none"
               />
             </defs>
-            <text fontSize="18">
+            <text fontSize="18" style={sectionTextStyle(sections.stretching, alt)}>
               <textPath
                 href="#curve-bottom-left"
                 startOffset="43%"
@@ -189,18 +228,13 @@ const DonutChartNext: React.FC<tDonutChartNextProps> = ({
                 Stretching
               </textPath>
             </text>
-            { false && (
-              <Check
-                svgProps={{
-                  x: 220,
-                  y: 375,
-                }}
-              />
+            {sections.stretching === "done" && (
+              <Check svgProps={{ x: 220, y: 375 }} />
             )}
           </g>
           <g id="top-left">
             <path
-              className={`${styles.section}`}
+              className={sectionClass(sections.baking, styles)}
               d="m 150.78053,312.73473 c 0,-15.67813 5.51104,-39.98315 13.00995,-57.37702 16.66451,-38.65372 47.42608,-70.36776 85.52206,-88.17011 19.68147,-9.1972 45.26874,-15.56093 62.56735,-15.56093 h 7.90063 v 73.39733 73.39733 l -20.25,0.39545 c -18.40118,0.35935 -20.7173,0.60304 -25.36826,2.66914 -6.22848,2.76688 -10.44544,7.00839 -13.56182,13.64075 l -2.34937,5 -53.73528,0.25869 -53.73526,0.25869 z"
               id="baking"
             />
@@ -211,7 +245,7 @@ const DonutChartNext: React.FC<tDonutChartNextProps> = ({
                 fill="none"
               />
             </defs>
-            <text fontSize="18">
+            <text fontSize="18" style={sectionTextStyle(sections.baking, alt)}>
               <textPath
                 href="#curve-top-left"
                 startOffset="57%"
@@ -220,13 +254,8 @@ const DonutChartNext: React.FC<tDonutChartNextProps> = ({
                 Baking
               </textPath>
             </text>
-            { false && (
-              <Check
-                svgProps={{
-                  x: 230,
-                  y: 230,
-                }}
-              />
+            {sections.baking === "done" && (
+              <Check svgProps={{ x: 230, y: 230 }} />
             )}
           </g>
         </g>

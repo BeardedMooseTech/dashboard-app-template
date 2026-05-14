@@ -5,13 +5,14 @@ const slideStyles: React.CSSProperties = {
   display: "flex",
   flexWrap: "wrap",
   overflow: "auto",
+  justifyContent: "space-evenly",
 };
 
 const Slide: React.FC<{ title: string, content?: Array<any>, alt: boolean, children?: React.ReactNode }> = ({ title, content, alt, children }) => (
   <section className="h-full w-full">
     <Header title={title} alt={alt} />
     <div style={slideStyles} className="h-full w-full flex-1 flex justify-center items-center">
-      {children ? children : content?.map((slide, index) => (
+      {children ? children : content?.map((_, index) => (
         <div key={index} className="flex-1 flex justify-center items-center">
           <DonutChart
             alt={alt}
