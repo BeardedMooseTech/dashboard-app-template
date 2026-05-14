@@ -307,7 +307,7 @@ const DonutChartNext: React.FC<tDonutChartNextProps> = ({
           y="252.5"
           textAnchor="middle"
           dominantBaseline="middle"
-          fontSize="18"
+          fontSize="14"
         >
           {manufacturingOrder}
         </text>
