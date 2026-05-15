@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 
 export async function POST() {
   try {
+    console.log("Received request for /api/dashboards");
     const response = await fetch(`${process.env.NEXT_ODOO_URL}/jsonrpc`, {
       method: "POST",
       headers: {
@@ -48,7 +49,10 @@ export async function POST() {
       }),
     });
 
-    const { result } = await response.json();
+    const json = await response.json();
+    console.log("Raw API Response:", json);
+
+    const { result } = json;
 
     console.log("API Result:", result);
 

@@ -66,6 +66,7 @@ function DevicesContent() {
       try {
         const res = await fetch("/api/dashboards", { method: "POST" });
         const json = await res.json();
+        console.log("Fetched Productions:", json?.result?.MrpProduction);
         setProductions(json?.result?.MrpProduction ?? []);
       } catch (e) {
         console.error(e);
@@ -80,6 +81,11 @@ function DevicesContent() {
 
   return (
     <div className={`${mainClass} w-screen h-screen`}>
+      {productions.length === 0 && (
+        <div className="w-full h-full flex items-center justify-center">
+          <p className="text-2xl font-semibold opacity-60">No active Manufacturing Orders found</p>
+        </div>
+      )}
       {productions.length > 0 && (
         <Slides className="h-full w-full">
           {chunk(productions, 3).map((group, i) => (
