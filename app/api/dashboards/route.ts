@@ -25,8 +25,11 @@ export async function POST() {
               query: `
               query {
               MrpProduction(domain:[
-                  ["product_id.default_code", "ilike", "WBF"],
-                  ["state", "=", "progress"],
+                  ['state', '=', 'progress'],
+                  ['|', '|',   
+                  ['product_id.default_code', 'ilike', 'WBF'],
+                  ['product_id.default_code', 'ilike', 'RBF'],
+                  ['product_id.default_code', 'ilike', 'TBF'],
                 ]) {
                   name
                   state
