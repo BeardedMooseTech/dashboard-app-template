@@ -1,0 +1,21 @@
+name: AI Code Review with xAI Grok
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+permissions:
+  pull-requests: write
+
+jobs:
+  review:
+    name: Grok Code Review
+    runs-on: ubuntu-latest
+    steps:
+      - name: Code Review
+        uses: tarmojussila/xai-code-review@v0.1.0
+        with:
+          XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
+          # Optional but recommended for your use case:
+          XAI_SYSTEM_PROMPT: "You are an expert Odoo and Python developer. Focus on Odoo best practices, Python cleanliness, maintainability, DRY principles, performance, security, and general code quality."
+          # XAI_MODEL: grok-4  # or whatever model you prefer
