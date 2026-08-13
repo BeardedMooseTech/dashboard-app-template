@@ -148,7 +148,7 @@ const DonutChartNext: React.FC<tDonutChartNextProps> = ({
 
         <text fontSize="21">
           <textPath href="#title-curve" startOffset="50%" textAnchor="middle">
-            {productName}
+            {productName.length > 30 ? `${productName.slice(0, 30)}...` : productName}
           </textPath>
         </text>
       </g>
