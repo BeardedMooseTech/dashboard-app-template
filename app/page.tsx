@@ -20,6 +20,7 @@ type MrpProduction = {
   mo_name: string;
   scanned_qty: number;
   qty_producing: number;
+  product_uom_qty: number;
   product_id: {
     id: number;
     name: string;
@@ -95,7 +96,7 @@ function DevicesContent() {
                   key={p.id}
                   productName={p.product_id.name}
                   manufacturingOrder={p.name}
-                  goal={p.qty_producing}
+                  goal={p.product_uom_qty}
                   done={p.scanned_qty}
                   workorder_ids={p.workorder_ids}
                   alt={isAltTheme}

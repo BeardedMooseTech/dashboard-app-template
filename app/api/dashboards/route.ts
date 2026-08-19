@@ -33,6 +33,7 @@ export async function POST() {
                   mo_name
                   scanned_qty
                   qty_producing
+                  product_uom_qty
                   product_id {
                     name
                     default_code
